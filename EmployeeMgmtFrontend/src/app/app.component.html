@@ -1,2 +1,26 @@
+<header>
+    <mat-toolbar class="!bg-blue-500">
+        <button (click)="drawer.toggle()" mat-icon-button class="!text-white" aria-label="Example icon-button with menu icon">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="!text-white">Employee Management System</span>
+        <span class="example-spacer"></span>
+   </mat-toolbar>
+</header>
 
-<router-outlet />
+<mat-drawer-container class="">
+  <mat-drawer #drawer class="w-[300px] bg-white shadow-lg" mode="side" [opened]="true">
+    <div class="flex flex-cols items-center gap-4 text-blue-700 p-4">
+        <a routerLink="/">Dashboard</a>
+        <a routerLink="/departments">Departments</a>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <main class="min-h-screen bg-gray-100">
+        <router-outlet></router-outlet>
+    </main>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+<footer></footer>
