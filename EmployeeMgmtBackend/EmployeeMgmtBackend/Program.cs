@@ -25,6 +25,9 @@ builder.Services.AddDbContext<AppDbContext>(options=>
 options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
 builder.Services.AddScoped<IRepository<Department>, Repository<Department>>();
+builder.Services.AddScoped<IRepository<Employee>, Repository<Employee>>();
+
+
 var app = builder.Build();
 using ( var scope = app.Services.CreateScope())
 {
