@@ -60,7 +60,8 @@ export class EmployeeComponent {
   readonly dialog = inject(MatDialog);
   openDialog(): void {
     let ref = this.dialog.open(EmployeeFormComponent, {
-        panelClass:'m-auto'
+        panelClass:'m-auto',
+        data:{}
     });
 
     ref.afterClosed().subscribe(result=>{

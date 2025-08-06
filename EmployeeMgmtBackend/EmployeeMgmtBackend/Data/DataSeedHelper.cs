@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EmployeeMgmtBackend.Service;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeMgmtBackend.Data
 {
@@ -24,6 +25,26 @@ namespace EmployeeMgmtBackend.Data
                 dbContext.Employees.Add(new Entity.Employee { Name = "Employee 1" });
                 dbContext.Employees.Add(new Entity.Employee { Name = "EMployee 2" });
             }
+ 
+
+            if (!dbContext.Users.Any())
+            {
+                var passwordHelper = new PasswordHelper();
+                dbContext.Users.Add(new Entity.User()
+                {
+                    Email = "admin@test.com",
+                    Password = passwordHelper.HashPassword("12345"),
+                    Role = "Admin"
+                });
+
+                dbContext.Users.Add(new Entity.User()
+                {
+                    Email = "employee@test.com",
+                    Password = passwordHelper.HashPassword("12345"),
+                    Role = "Employee"
+                });
+            }
+
             dbContext.SaveChanges();
         }
     }
