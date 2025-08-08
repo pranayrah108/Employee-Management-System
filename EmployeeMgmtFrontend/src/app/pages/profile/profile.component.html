@@ -1,0 +1,61 @@
+<div class="flex justify-center mt-8 p-8">
+  <mat-card class="login-card w-6/12">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold mb-2"
+        >Profile</mat-card-title
+      >
+    </mat-card-header>
+
+    <form
+      class="flex flex-col"
+      [formGroup]="profileForm"
+      (ngSubmit)="onUpdate()"
+    >
+      <div class="w-full mb-5">
+        <input
+          class="bg-gray-400 cursor-pointer"
+          type="file"
+          (change)="fileUpload($event)"
+        />
+        <img class="w-[150px] rounded-full" [src]="imageSrc" alt="" />
+      </div>
+
+      <mat-form-field class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Enter your name" formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="Enter your email"
+          formControlName="email"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Phone</mat-label>
+        <input
+          matInput
+          placeholder="Enter your phone"
+          formControlName="phone"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          placeholder="Enter your password"
+          formControlName="password"
+          type="password"
+        />
+      </mat-form-field>
+
+      <button mat-raised-button class="!bg-green-500 text-white" type="submit">
+        Update
+      </button>
+    </form>
+  </mat-card>
+</div>
