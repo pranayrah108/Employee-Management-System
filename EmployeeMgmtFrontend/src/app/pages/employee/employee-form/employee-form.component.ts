@@ -58,8 +58,8 @@ export class EmployeeFormComponent {
   httpService = inject(HttpService);
 
   ngOnInit() {
-    this.httpService.getDepartments().subscribe((result) => {
-      this.departments = result;
+    this.httpService.getDepartments({}).subscribe((result) => {
+      this.departments = result.data;
     });
 
     console.log('here', this.data);

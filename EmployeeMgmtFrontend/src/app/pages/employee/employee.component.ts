@@ -6,28 +6,49 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialog,
 } from '@angular/material/dialog';
+import {MatFormField, MatInputModule} from '@angular/material/input';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime } from 'rxjs';
+import { PagedData } from '../../types/paged-data';
 
 @Component({
   selector: 'app-employee',
   imports: [
     TableComponent,
     MatButtonModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatFormField
   ],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss',
 })
 export class EmployeeComponent {
   httpService = inject(HttpService);
-  employeeList: IEmployee[] = [];
+  pagedEmployeeData!: PagedData<IEmployee>;
   showCols = ['id', 'name', 'email', 'phone', 'action'];
+  filter:any={
+    pageIndex:0,
+    pageSize:2
+  };
+
   ngOnInit() {
     this.getLatestData();
+    this.searchControl.valueChanges.pipe(debounceTime(300)).subscribe((result:string | null)=>{
+      console.log(result);
+      this.filter.search = result;
+      this.filter.pageIndex = 0;
+      this.getLatestData();
+    })
   }
 
+  searchControl = new FormControl('');
+  totalData!:number;
+
   getLatestData(){
-    this.httpService.getEmployeeList().subscribe((result) => {
-      this.employeeList = result;
+    this.httpService.getEmployeeList(this.filter).subscribe((result) => {
+      this.pagedEmployeeData = result;
     });
   }
 
@@ -67,5 +88,12 @@ export class EmployeeComponent {
     ref.afterClosed().subscribe(result=>{
       this.getLatestData();
     })
+  }
+
+
+  pageChange(event:any) {
+    console.log(event);
+    this.filter.pageIndex = event.pageIndex;
+       this.getLatestData();
   }
 }

@@ -1,5 +1,6 @@
 ﻿using EmployeeMgmtBackend.Data;
 using EmployeeMgmtBackend.Entity;
+using EmployeeMgmtBackend.Migrations.Models;
 using EmployeeMgmtBackend.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,7 +25,7 @@ namespace EmployeeMgmtBackend.Controllers
 
 
         [HttpGet("{id}")]
-        [Authorize]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetEmployeeList([FromRoute] int id)
         {
             return Ok(await employeeRepository.FindByIdAsync(id));
@@ -32,9 +33,30 @@ namespace EmployeeMgmtBackend.Controllers
 
         [HttpGet]
         [Authorize(Roles ="Admin")]
-        public async Task<IActionResult> GetEmployeeList()
+        public async Task<IActionResult> GetEmployeeList([FromQuery] SearchOptions searchOption)
         {
-            return Ok(await employeeRepository.GetAll());
+            var pagedData = new PagedData<Employee>();
+            List<Employee> filterData;
+            if (string.IsNullOrEmpty(searchOption.Search))
+            {
+                pagedData.Data = await employeeRepository.GetAll();
+            }
+            else
+            {
+                pagedData.Data = await employeeRepository.GetAll(x =>
+                x.Name.Contains(searchOption.Search) ||
+                x.Phone.Contains(searchOption.Search) ||
+                x.Email.Contains(searchOption.Search));
+
+            }
+
+            pagedData.TotalData = pagedData.Data.Count;    
+            if (searchOption.PageIndex.HasValue)
+            {
+                pagedData.Data = pagedData.Data.Skip(searchOption.PageIndex.Value * searchOption.PageSize.Value)
+                    .Take(searchOption.PageSize.Value).ToList();
+            }
+            return Ok(pagedData);
         }
 
         [HttpPost]

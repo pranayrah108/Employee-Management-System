@@ -1,19 +1,24 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { PagedData } from '../../types/paged-data';
 
 @Component({
   selector: 'app-table',
-  imports: [MatTableModule, MatCardModule, MatButtonModule],
+  imports: [MatTableModule, MatCardModule, MatButtonModule, MatPaginatorModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })
 export class TableComponent {
-  @Input() data: any[] = [];
+  @Input() pagedData!: PagedData<any>;
   @Input() displayedColumns: any[] = [];
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDelete = new EventEmitter<any>();
+  @Output() onPageChange = new EventEmitter<any>();
+  @Input() pageSize!: number;
+  @Input() pageIndex!: number;
 
   edit(rowData: any) {
     this.onEdit.emit(rowData);
@@ -21,5 +26,10 @@ export class TableComponent {
 
   delete(rowData: any) {
     this.onDelete.emit(rowData);
+  }
+
+  pageChange(event: any) {
+    console.log(event);
+    this.onPageChange.emit(event);
   }
 }

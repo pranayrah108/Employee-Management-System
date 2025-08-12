@@ -1,0 +1,12 @@
+mat-card {
+  height: auto;
+  max-height: 90vh; /* So it never goes beyond the screen */
+  overflow-y: auto; /* Scroll if content overflows */
+}
+
+@media (max-width: 768px) {
+  mat-card {
+    padding: 16px; /* Reduce padding for smaller screens */
+    max-height: 95vh;
+  }
+}
