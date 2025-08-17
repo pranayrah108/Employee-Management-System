@@ -24,10 +24,12 @@
     <div class="flex flex-col items-center gap-4 text-blue-700 p-4">
       @if( authService.isEmployee ){
         <a routerLink="/employee-dashboard"> Employee Dashboard</a>
+        <a routerLink="/leaves"> Leaves</a>
       }@else {
         <a routerLink="/">Dashboard</a>
         <a routerLink="/departments">Departments</a>
         <a routerLink="/employee">Employee List</a>
+        <a routerLink="/leaves"> Leaves</a>
       }
     </div>
   </mat-drawer>

@@ -1,5 +1,6 @@
 using EmployeeMgmtBackend.Data;
 using EmployeeMgmtBackend.Entity;
+using EmployeeMgmtBackend.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -31,6 +32,9 @@ options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 builder.Services.AddScoped<IRepository<Department>, Repository<Department>>();
 builder.Services.AddScoped<IRepository<Employee>, Repository<Employee>>();
 builder.Services.AddScoped<IRepository<User>, Repository<User>>();
+builder.Services.AddScoped<IRepository<Leave>, Repository<Leave>>();
+
+builder.Services.AddScoped<UserHelper>();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
