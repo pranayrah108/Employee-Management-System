@@ -4,9 +4,6 @@ using EmployeeMgmtBackend.Migrations.Models;
 using EmployeeMgmtBackend.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using System.Runtime.InteropServices;
-using System.Security.Claims;
 
 namespace EmployeeMgmtBackend.Controllers
 {
@@ -15,11 +12,13 @@ namespace EmployeeMgmtBackend.Controllers
     public class LeaveController : ControllerBase
     {
         private readonly IRepository<Leave> leaveRepo;
+        private readonly IRepository<Attendance> attendanceRepo;
         private readonly UserHelper userHelper;
 
-        public LeaveController(IRepository<Leave> leaveRepo, UserHelper userHelper) 
+        public LeaveController(IRepository<Leave> leaveRepo, IRepository<Attendance> attendanceRepo, UserHelper userHelper) 
         {
             this.leaveRepo = leaveRepo;
+            this.attendanceRepo = attendanceRepo;
             this.userHelper = userHelper;
         }
 
@@ -54,6 +53,16 @@ namespace EmployeeMgmtBackend.Controllers
             if (isAdmin) 
             {
                 leave.Status = model.Status!.Value;
+
+                if(model.Status.Value == (int)LeaveStatus.Accepted)
+                {
+                    await attendanceRepo.AddAsync(new Attendance()
+                    {
+                        Date = leave.LeaveDate,
+                        EmployeeId = leave.EmployeeId,
+                        Type = (int)AttendaceType.Leave
+                    });
+                }
             }
             else
             {

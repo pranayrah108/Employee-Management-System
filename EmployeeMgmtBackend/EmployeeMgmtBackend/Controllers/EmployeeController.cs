@@ -82,7 +82,6 @@ namespace EmployeeMgmtBackend.Controllers
         {
             var employee = await employeeRepository.FindByIdAsync(id);
             employee.Name = model.Name;
-            employee.Email = model.Email;
             employee.Phone = model.Phone;
             employee.DepartmentId = model.DepartmentId;
             employee.LastWorkingDate = model.LastWorkingDate;

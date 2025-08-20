@@ -15,7 +15,7 @@
     [pageIndex]="filter.pageIndex"
     [pageSize]="filter.pageSize"
     [displayedColumns]="showCols"
-    (onEdit)="edit($event)"
+    (rowClick)="OnRowClick($event)"
     (onDelete)="delete($event)"
     (onPageChange)="pageChange($event)"
   ></app-table>

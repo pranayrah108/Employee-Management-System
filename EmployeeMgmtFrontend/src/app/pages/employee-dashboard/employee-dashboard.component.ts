@@ -3,6 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ApplyLeaveComponent } from '../../components/apply-leave/apply-leave.component';
 import { MatDialog } from '@angular/material/dialog';
+import { LeaveService } from '../../services/leave.service';
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -26,4 +27,18 @@ export class EmployeeDashboardComponent {
       // this.getLatestData();
     });
   }
+
+  leaveService = inject(LeaveService);
+  markAttendance() {
+    this.leaveService.markPresent().subscribe({
+      next: (result) => {
+        alert('You are marked present for today.');
+      },
+      error: (e: any) => {
+        console.log(e);
+        alert(e.error);
+      },
+    });
+  }
+
 }

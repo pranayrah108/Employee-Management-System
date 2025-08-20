@@ -90,12 +90,6 @@ namespace EmployeeMgmtBackend.Controllers
                     employee.Name = model.Name;
                 }
                 
-                if (!string.IsNullOrEmpty(employee.Email))
-                {
-                    employee.Email = model.Email;
-                }
-
-                
                 if (!string.IsNullOrEmpty(employee.Phone))
                 {
                     employee.Phone = model.Phone;
