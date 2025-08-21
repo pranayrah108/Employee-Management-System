@@ -124,7 +124,7 @@ namespace EmployeeMgmtBackend.Controllers
 
 
         [Authorize]
-        [HttpGet("Profile")]
+        [HttpGet("profile")]
         public async Task<IActionResult> GetProfile()
         {
             var emaill = User.FindFirstValue(ClaimTypes.Name);
@@ -132,6 +132,7 @@ namespace EmployeeMgmtBackend.Controllers
             var employee = (await empRepo.GetAll(x => x.Id == user.Id)).FirstOrDefault();
             return Ok(new ProfileDto
             {
+                Salary = employee?.Salary,
                 Name = employee?.Name,
                 Email = employee.Email,
                 Phone = employee?.Phone,

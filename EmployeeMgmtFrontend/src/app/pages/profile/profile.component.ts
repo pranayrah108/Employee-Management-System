@@ -31,6 +31,7 @@ export class ProfileComponent {
       phone: [],
       name: [],
       password: [],
+      salary:[]
     });
 
     this.authService.getProfile().subscribe((result: any) => {

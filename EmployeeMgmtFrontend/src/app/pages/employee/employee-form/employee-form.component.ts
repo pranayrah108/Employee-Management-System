@@ -47,6 +47,7 @@ export class EmployeeFormComponent {
     email: ['', [Validators.required, Validators.email]],
     phone: ['', [Validators.required]],
     gender: ['', [Validators.required]],
+    salary:[],
     departmentId: ['', [Validators.required]],
     jobTitle: [''],
     joiningDate: [''],
@@ -84,7 +85,7 @@ export class EmployeeFormComponent {
     if (this.data.employeeId) {
       console.log(this.employeeForm.value);
       console.log('valid', this.employeeForm.valid);
-      let value: any = this.employeeForm.value;
+      let value: any = this.employeeForm.getRawValue();;
       this.httpService.UpdateEmployee(this.data.employeeId,value).subscribe(() => {
         alert('Record Updated.');
         this.dialogRef.close();
@@ -92,7 +93,7 @@ export class EmployeeFormComponent {
     } else {
       console.log(this.employeeForm.value);
       console.log('valid', this.employeeForm.valid);
-      let value: any = this.employeeForm.value;
+      let value: any = this.employeeForm.getRawValue();;
       this.httpService.addEmployee(value).subscribe(() => {
         alert('Record Saved.');
         this.dialogRef.close();

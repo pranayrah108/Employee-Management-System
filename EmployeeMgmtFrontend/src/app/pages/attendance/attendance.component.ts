@@ -50,7 +50,10 @@ export class AttendanceComponent {
 
   data!:PagedData<IAttendance>
   getLatestData() {
-    this.filter.employeeId = this.employeeId as string;
+    
+    if(this.employeeId){
+      this.filter.employeeId = this.employeeId as string;
+    }
     this.leaveService.getAttendanceHistory(this.filter).subscribe(result=>{
       this.data=result;
     })

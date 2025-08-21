@@ -20,6 +20,7 @@ namespace EmployeeMgmtBackend.Entity
 
         public int? UserId { get; set; }
         public User? User { get; set; }
+        public int? Salary { get; set; }
 
     }
 }

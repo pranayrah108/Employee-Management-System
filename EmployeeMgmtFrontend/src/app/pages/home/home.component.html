@@ -1,1 +1,18 @@
-<p>home works!</p>
+<div class="p-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <mat-card class="p-8 !bg-green-200">
+      <h1 class="text-exl mb-2">Total Salary for this month</h1>
+      <h2 class="text-3xl text-green-500 mx-auto">{{ salaryForMonth }}</h2>
+    </mat-card>
+
+    <mat-card class="p-8 !bg-purple-200">
+      <h1 class="text-exl mb-2">Total Employee Count</h1>
+      <h2 class="text-3xl text-green-500 mx-auto">{{ employeeCount }}</h2>
+    </mat-card>
+
+    <mat-card class="p-8 !bg-red-200">
+      <h1 class="text-exl mb-2">Total Department Count</h1>
+      <h2 class="text-3xl text-green-500 mx-auto">{{ departmentCount }}</h2>
+    </mat-card>
+  </div>
+</div>

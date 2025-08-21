@@ -43,6 +43,18 @@
         />
       </mat-form-field>
 
+      @if(authService.isEmployee){
+        <mat-form-field class="full-width">
+        <mat-label>Salary</mat-label>
+        <input
+          matInput
+          placeholder="Enter your password"
+          formControlName="salary"
+          type="number"
+        />
+      </mat-form-field>
+      }
+
       <mat-form-field class="full-width">
         <mat-label>Password</mat-label>
         <input
