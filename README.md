@@ -17,3 +17,6 @@ Angular, TypeScript, SCSS, TailwindCSS, Angular Material
 
 **Backend:**  
 ASP.NET Core Web API (.NET 6+), Entity Framework Core
+
+**Database:**  
+SQL Server
