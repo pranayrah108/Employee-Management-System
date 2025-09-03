@@ -15,4 +15,34 @@
       <h2 class="text-3xl text-green-500 mx-auto">{{ departmentCount }}</h2>
     </mat-card>
   </div>
+
+  <div class="mt-8">
+    <mat-card class="p-4">
+      <h1 class="text-xl font-semibold">Employee On Leave Today</h1>
+      @if(leaveData){
+        <app-table
+          [showPage]="false"
+          [pagedData]="leaveData" 
+          [displayedColumns]="leaveCols">
+        </app-table>
+      }
+      
+    </mat-card>
+  </div>
+
+  <div class="mt-8">
+    <mat-card class="p-4">
+      <h1 class="text-xl font-semibold">Department Wise Employee Data</h1>
+      @if(departmentData){
+        <canvas baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [type]="'bar'">
+      </canvas>
+      }
+    </mat-card>
+  </div>
+  
 </div>

@@ -11,5 +11,6 @@ namespace EmployeeMgmtBackend.Migrations.Models
         public DateTime? LeaveDate { get; set; }
 
         public int? EmployeeId { get; set; }
+        public string? EmployeeName { get; set; }
     }
 }

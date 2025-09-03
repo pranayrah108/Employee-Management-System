@@ -21,6 +21,7 @@ export class TableComponent {
   @Input() pageIndex!: number;
   @Input() pageSize!: number;
   @Input() showPage= true;
+  @Input() showPaged= true;
   cols: any[] = [];
   ngOnInit() {
     this.cols = this.displayedColumns.map((x) => x.key || x);
