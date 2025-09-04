@@ -67,8 +67,8 @@ export class DepartmentsComponent {
     })
   }
 
-  delete(id:number){
-    this.httpService.deletDepartment(id).subscribe(()=>{
+  delete(department: IDepartment){
+    this.httpService.deletDepartment(department.id).subscribe(()=>{
       alert('Records Deleted.');
       this.getLatestData();
     })
